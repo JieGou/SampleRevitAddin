@@ -1,4 +1,4 @@
-﻿// <copyright file="App.cs" company="StarkBIM Inc">
+// <copyright file="App.cs" company="StarkBIM Inc">
 // Copyright (c) StarkBIM Inc. All rights reserved.
 // </copyright>
 
@@ -148,11 +148,11 @@ namespace StarkBIM.SampleRevitApp.RvtAddin
         {
             try
             {
-                CleanUpUpdatedAssembliesDir();
+                this.CleanUpUpdatedAssembliesDir();
 
                 RibbonPanel ribbonPanel = application.CreateRibbonPanel(Tab.AddIns, "Sample");
 
-                ribbonPanel.AddItem(CreatePushButtonData<SampleCommand>());
+                ribbonPanel.AddItem(this.CreatePushButtonData<SampleCommand>());
 
                 application.ControlledApplication.ApplicationInitialized += ControlledApplicationOnApplicationInitialized;
 

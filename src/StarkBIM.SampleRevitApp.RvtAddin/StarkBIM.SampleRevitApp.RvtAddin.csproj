@@ -311,6 +311,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>powershell.exe -file "$(SolutionDir)CopyAddinFiles.ps1" -SolutionDir $(SolutionDir) -TargetDir $(TargetDir) -ConfigurationName $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>::powershell.exe -file "$(SolutionDir)CopyAddinFiles.ps1" -SolutionDir $(SolutionDir) -TargetDir $(TargetDir) -ConfigurationName $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

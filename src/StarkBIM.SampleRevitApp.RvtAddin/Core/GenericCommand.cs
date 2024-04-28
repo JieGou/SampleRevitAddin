@@ -25,18 +25,19 @@ namespace StarkBIM.SampleRevitApp.RvtAddin.Core
     using StarkBIM.SampleRevitApp.RvtAddin.Extensions;
 
     /// <summary>
-    ///     The generic command means that we don't need to tag each class with the Transaction attribute.
+    ///     The generic command means that we don't need to tag each class with the Transaction attribute.<para/>
     ///     It also means that commands don't need to be kept in the RvtAddin assembly.
     /// </summary>
     /// <typeparam name="TCommand">The type of the command runner</typeparam>
     /// <remarks>
-    ///     Tried to see if it was possible to call a class that doesn't exist, but it didn't work
-    ///     // Tried to trigger the TypeResolve event using this, but it didn't work
-    ///     ////var button3Data = new PushButtonData("Button3", "Button3", asmName, "BadName");
+    ///     Tried to see if it was possible to call a class that doesn't exist, but it didn't work<para/>
+    ///     Tried to trigger the TypeResolve event using this, but it didn't work<para/>
+    /// <![CDATA[
+    ///     var button3Data = new PushButtonData("Button3", "Button3", asmName, "BadName");
     ///     // This also doesn't trigger the TypeResolve event. There are no other AppDomains (at least accessible from here)
-    ///     ////var button3Data = new PushButtonData("Button3", "Button3", asmName,
-    ///     "StarkBIM.SampleRevitApp.RvtAddin.GenericCommand`1[[BadName]]");
-    ///     ////ribbonPanel.AddItem(button3Data);
+    ///     var button3Data = new PushButtonData("Button3", "Button3", asmName,"StarkBIM.SampleRevitApp.RvtAddin.GenericCommand`1[[BadName]]");
+    ///     ribbonPanel.AddItem(button3Data);
+    /// ]]>
     /// </remarks>
     [Transaction(TransactionMode.Manual)]
     public class GenericCommand<TCommand> : IExternalCommand
@@ -47,7 +48,7 @@ namespace StarkBIM.SampleRevitApp.RvtAddin.Core
         public Result Execute(
             [NotNull] ExternalCommandData commandData,
             [CanBeNull] ref string message,
-            [CanBeNull] [ItemNotNull] ElementSet elements)
+            [CanBeNull][ItemNotNull] ElementSet elements)
         {
             var updatedAssembly = GetUpdatedAssemblyIfNewer();
 
@@ -58,16 +59,17 @@ namespace StarkBIM.SampleRevitApp.RvtAddin.Core
 
             var lifetimeScope = App.LifetimeScope.ThrowIfNull();
 
-            using (ILifetimeScope scope = lifetimeScope.BeginLifetimeScope(
-                                                                           b =>
-                                                                               {
-                                                                                   b.RegisterInstance(commandData).ExternallyOwned();
+            using (ILifetimeScope scope =
+                lifetimeScope.BeginLifetimeScope(
+                    b =>
+                    {
+                        b.RegisterInstance(commandData).ExternallyOwned();
 
-                                                                                   if (updatedAssembly != null)
-                                                                                   {
-                                                                                       b.RegisterCommandTypesForAssembly(updatedAssembly);
-                                                                                   }
-                                                                               }))
+                        if (updatedAssembly != null)
+                        {
+                            b.RegisterCommandTypesForAssembly(updatedAssembly);
+                        }
+                    }))
             {
                 // This initializes the command with all the necessary services
                 var commandRunner = scope.Resolve<TCommand>();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB0F5E11-0E57-4E7A-B609-BB1C964E930F}"
 EndProject
@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		CopyAddinFiles.ps1 = CopyAddinFiles.ps1
 		CopyTestAssemblies.ps1 = CopyTestAssemblies.ps1
 		GetInstallDirectory.psm1 = GetInstallDirectory.psm1
 		SharedCodeAnalysis.ruleset = SharedCodeAnalysis.ruleset
